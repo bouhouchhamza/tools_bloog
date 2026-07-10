@@ -129,6 +129,34 @@ export const plannedTools: PlannedTool[] = [
     description: "Preview how a title, description, and URL may appear in search result snippets.",
     category: "SEO",
     isLive: true
+  },
+  {
+    slug: "csv-to-json-converter",
+    title: "CSV to JSON Converter",
+    description: "Convert CSV rows into formatted JSON in your browser, with optional header-based object keys.",
+    category: "Developer",
+    isLive: true
+  },
+  {
+    slug: "base64-encoder-decoder",
+    title: "Base64 Encoder and Decoder",
+    description: "Encode plain text to Base64 or decode Base64 back to readable Unicode text in your browser.",
+    category: "Developer",
+    isLive: true
+  },
+  {
+    slug: "text-diff-checker",
+    title: "Text Diff Checker",
+    description: "Compare two blocks of text line by line and identify added, removed, and unchanged lines.",
+    category: "Productivity",
+    isLive: true
+  },
+  {
+    slug: "percentage-calculator",
+    title: "Percentage Calculator",
+    description: "Solve common percentage questions and calculate percentage increases or decreases with clear results.",
+    category: "Business",
+    isLive: true
   }
 ];
 

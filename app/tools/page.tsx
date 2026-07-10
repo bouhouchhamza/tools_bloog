@@ -5,7 +5,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
 import { ToolsDirectory } from "@/components/ToolsDirectory";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/seo";
-import { plannedTools, toolCategories, getToolPath, getToolsByCategory } from "@/lib/tools";
+import { toolCategories, getLiveTools } from "@/lib/tools";
 
 export const metadata: Metadata = {
   title: "Free Business, SEO, AI Automation, and Productivity Tools",
@@ -40,6 +40,8 @@ const faqs = [
 ];
 
 export default function ToolsPage() {
+  const liveTools = getLiveTools();
+
   return (
     <>
       <JsonLd
@@ -69,7 +71,7 @@ export default function ToolsPage() {
               </p>
             </div>
             <div className="rounded-lg border border-[#dce5e0] bg-[#f8faf9] p-5 text-sm leading-6 text-[#40524c]">
-              <strong>{plannedTools.length} free tools</strong> across business, SEO, developer, productivity, AI, and
+              <strong>{liveTools.length} free tools</strong> across business, SEO, developer, productivity, AI, and
               marketing categories.
             </div>
           </div>
@@ -87,7 +89,7 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      <ToolsDirectory tools={plannedTools} />
+      <ToolsDirectory tools={liveTools} />
 
       <section className="bg-white py-12">
         <div className="container">
@@ -99,14 +101,14 @@ export default function ToolsPage() {
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dce5e0] pb-3">
                   <h3 className="text-2xl font-bold">{category}</h3>
                   <span className="text-sm font-semibold text-[#5e6f68]">
-                    {getToolsByCategory(category).length} tools
+                    {liveTools.filter((tool) => tool.category === category).length} tools
                   </span>
                 </div>
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
-                  {getToolsByCategory(category).map((tool) => (
+                  {liveTools.filter((tool) => tool.category === category).map((tool) => (
                     <Link
                       key={tool.slug}
-                      href={getToolPath(tool.slug)}
+                      href={`/tools/${tool.slug}`}
                       className="rounded-lg border border-[#dce5e0] p-5 hover:border-[#16705a]"
                     >
                       <h4 className="font-bold text-[#17211d]">{tool.title}</h4>

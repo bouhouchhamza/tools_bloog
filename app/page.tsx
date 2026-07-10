@@ -4,7 +4,8 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { NewsletterBox } from "@/components/NewsletterBox";
 import { JsonLd } from "@/components/JsonLd";
 import { categories } from "@/lib/categories";
-import { getFeaturedArticles } from "@/lib/articles";
+import { articles, getFeaturedArticles } from "@/lib/articles";
+import { getLiveTools } from "@/lib/tools";
 import { websiteSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const featured = getFeaturedArticles();
+  const liveToolCount = getLiveTools().length;
   const startHere = [
     { href: "/blog/what-is-a-workflow", title: "Understand workflows", copy: "Learn the basic shape of triggers, actions, owners, and outcomes." },
     { href: "/blog/how-to-build-first-simple-automation-workflow", title: "Build one simple flow", copy: "Create a small automation that is easy to test, explain, and improve." },
@@ -56,12 +58,12 @@ export default function HomePage() {
             </div>
             <dl className="mt-10 grid max-w-2xl gap-4 sm:grid-cols-3">
               <div>
-                <dt className="text-2xl font-black text-[#17211d]">17</dt>
+                <dt className="text-2xl font-black text-[#17211d]">{liveToolCount}</dt>
                 <dd className="text-sm leading-5 text-[#5e6f68]">free tools</dd>
               </div>
               <div>
-                <dt className="text-2xl font-black text-[#17211d]">25</dt>
-                <dd className="text-sm leading-5 text-[#5e6f68]">starter guides</dd>
+                <dt className="text-2xl font-black text-[#17211d]">{articles.length}</dt>
+                <dd className="text-sm leading-5 text-[#5e6f68]">practical guides</dd>
               </div>
               <div>
                 <dt className="text-2xl font-black text-[#17211d]">0</dt>

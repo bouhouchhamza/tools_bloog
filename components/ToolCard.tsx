@@ -18,7 +18,7 @@ export function ToolCard({ tool }: { tool: PlannedTool }) {
       </h2>
       <p className="mt-3 flex-1 text-sm leading-6 text-[#5e6f68]">{tool.description}</p>
       <Link href={getToolPath(tool.slug)} className="mt-5 inline-flex font-bold text-[#0d4f42]">
-        {tool.isLive ? "Open tool" : "View planned tool"}
+        Open tool
       </Link>
     </article>
   );

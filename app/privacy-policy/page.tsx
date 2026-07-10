@@ -17,13 +17,12 @@ export default function PrivacyPolicyPage() {
           calculating estimates.
         </p>
         <p>
-          We may receive information you choose to send by email. The current contact form preview does not submit data
-          because no backend form handler is connected.
+          We may receive information you choose to send directly to the contact email address published on this site.
         </p>
         <p>
-          The site does not currently include Google AdSense scripts. Advertising, analytics, or affiliate features may
-          be added in the future. If added, third-party services may process limited technical data according to their
-          own policies, and this page should be updated accordingly.
+          The site is configured to load Google AdSense when its production publisher setting is enabled. Google and
+          its advertising partners may use cookies or similar technologies and process technical information to serve,
+          measure, and protect advertising according to their own policies and available consent choices.
         </p>
         <p>
           Do not enter sensitive secrets, private credentials, regulated personal data, or confidential business

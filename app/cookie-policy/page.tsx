@@ -12,12 +12,13 @@ export default function CookiePolicyPage() {
       <h1 className="text-4xl font-black">Cookie Policy</h1>
       <div className="prose mt-6">
         <p>
-          WorkflowTools.space may use cookies or similar technologies to keep the site working, understand aggregate
-          usage, and support future analytics, advertising, or affiliate measurement.
+          WorkflowTools.space may use cookies or similar technologies to keep the site working and support advertising,
+          measurement, or other features described in the Privacy Policy.
         </p>
         <p>
-          The site does not currently include Google AdSense scripts. If ads, analytics, or affiliate tools are added
-          later, they may set their own cookies according to their policies.
+          The site is configured to load Google AdSense when its production publisher setting is enabled. Google and
+          its advertising partners may use cookies or similar technologies according to their own policies and the
+          consent choices available to a visitor.
         </p>
         <p>
           You can manage cookies through your browser settings. Contact{" "}

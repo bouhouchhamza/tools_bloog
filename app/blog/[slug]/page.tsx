@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.seoTitle,
     description: article.metaDescription,
-    alternates: { canonical: `/blog/${article.slug}` },
+    alternates: { canonical: absoluteUrl(`/blog/${article.slug}`) },
     openGraph: {
       title: article.seoTitle,
       description: article.metaDescription,
-      url: `/blog/${article.slug}`,
+      url: absoluteUrl(`/blog/${article.slug}`),
       type: "article",
       publishedTime: article.publishedDate,
       modifiedTime: article.updatedDate,
@@ -107,6 +107,16 @@ export default async function ArticlePage({ params }: Props) {
                     <li key={linkedArticle.slug}>
                       <a href={`/blog/${linkedArticle.slug}`}>{linkedArticle.title}</a>
                     </li>
+                  ))}
+                </ul>
+              </aside>
+            ) : null}
+            {article.toolLinks?.length ? (
+              <aside className="not-prose my-8 rounded-lg border border-[#b8dccf] bg-[#f1faf6] p-5">
+                <h2 className="text-base font-bold text-[#17211d]">Useful free tools</h2>
+                <ul className="mt-3 grid gap-2 text-sm font-semibold text-[#0d4f42] sm:grid-cols-2">
+                  {article.toolLinks.map((link) => (
+                    <li key={link.href}><a href={link.href}>{link.label}</a></li>
                   ))}
                 </ul>
               </aside>
