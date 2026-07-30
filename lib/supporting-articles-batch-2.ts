@@ -1,10 +1,11 @@
 import type { Article } from "@/lib/articles";
 
 const shared = {
-  author: "WorkflowTools.space",
+  author: "Hamza Bouhouch",
   publishedDate: "2026-07-10",
   updatedDate: "2026-07-10",
-  image: "/images/articles/business-tool-guides.svg"
+  image: "/images/articles/business-tool-guides.svg",
+  indexable: true
 };
 
 export const supportingArticlesBatch2: Article[] = [
@@ -64,7 +65,8 @@ export const supportingArticlesBatch2: Article[] = [
       { heading: "How an XML sitemap works", body: ["An XML sitemap lists canonical page URLs in a machine-readable format. It can help discovery on large, new, frequently changing, or weakly linked sites, although strong internal navigation remains important.", "Include URLs that are intended to be canonical and indexable. Avoid filling the sitemap with redirects, error pages, duplicates, or pages deliberately blocked from crawling."] },
       { heading: "Step-by-step setup", body: ["First decide which public pages should be crawlable and indexable. Draft conservative robots.txt rules, checking path prefixes carefully, then generate a sitemap containing the preferred public URLs.", "Add the sitemap location to robots.txt when useful, publish both files at stable URLs, and test them with the relevant search engine tools. Recheck the files after migrations or major URL changes."] },
       { heading: "Example for a small website", body: ["A small business site might allow normal public pages while discouraging crawling of an internal search-results path. Its sitemap could list the home page, service pages, contact page, useful articles, and public tools.", "The sitemap should not include the internal search results if they are not intended for indexing. This keeps the discovery list aligned with the site's actual canonical content strategy."] },
-      { heading: "Common mistakes", body: ["Frequent mistakes include using robots.txt to hide confidential pages, accidentally blocking the whole site, writing rules for the wrong hostname, and listing noncanonical URLs in the sitemap.", "Another mistake is treating submission as a guarantee. Search systems make independent crawling and indexing decisions. Monitor results and diagnose the specific page rather than repeatedly resubmitting unchanged files."] }
+      { heading: "Common mistakes", body: ["Frequent mistakes include using robots.txt to hide confidential pages, accidentally blocking the whole site, writing rules for the wrong hostname, and listing noncanonical URLs in the sitemap.", "Another mistake is treating submission as a guarantee. Search systems make independent crawling and indexing decisions. Monitor results and diagnose the specific page rather than repeatedly resubmitting unchanged files."] },
+      { heading: "Troubleshooting conflicting signals", body: ["When a sitemap URL is not discovered as expected, check its HTTP status, canonical tag, robots directives, internal links, and whether robots.txt allows the crawler to fetch it. The sitemap entry is only one signal in that chain.", "If a URL is both listed in a sitemap and blocked by robots.txt, decide which outcome is intentional instead of repeatedly resubmitting it. Keep a dated copy before changing crawler rules, test on the correct hostname, and recheck important templates after deployment."] }
     ],
     faq: [
       { question: "Do I need both robots.txt and an XML sitemap?", answer: "Not every small site needs complex files, but each can be useful because they perform different jobs." },
@@ -94,7 +96,8 @@ export const supportingArticlesBatch2: Article[] = [
       { heading: "Step 3: check context and duplicates", body: ["Read the complete URL, not just the slug. A short slug may be clear inside a descriptive directory but ambiguous at the site root.", "Search the site or content system for duplicates before publishing. If two pages genuinely cover the same topic, decide whether they should be combined rather than adding arbitrary numbers to one URL."] },
       { heading: "Examples", body: ["“How to Create a WhatsApp Link for Your Business” can become how-to-create-a-whatsapp-link-for-business. “Robots.txt vs Sitemap: What Is the Difference?” can become robots-txt-vs-sitemap-what-is-the-difference.", "Dates belong in a slug only when the date is fundamental to the content. An evergreen guide usually benefits from a stable address that does not need to change each year."] },
       { heading: "Common slug mistakes", body: ["Avoid long strings, underscores when the site standard uses hyphens, unreadable abbreviations, repeated keywords, and IDs with no meaning to readers.", "Changing a live slug casually is another major mistake. If a URL must change, update internal links, use an appropriate permanent redirect, update the sitemap, and verify that the old address does not become a dead end."] },
-      { heading: "A final publishing check", body: ["Confirm that the slug matches the page's actual subject, reads clearly aloud, follows the existing site structure, and contains no accidental personal or draft information.", "Once published, treat the URL as a durable reference. Improve the title and content over time without changing the slug unless there is a strong structural reason."] }
+      { heading: "A final publishing check", body: ["Confirm that the slug matches the page's actual subject, reads clearly aloud, follows the existing site structure, and contains no accidental personal or draft information.", "Once published, treat the URL as a durable reference. Improve the title and content over time without changing the slug unless there is a strong structural reason."] },
+      { heading: "Troubleshooting a bad generated slug", body: ["If meaningful characters disappear, check whether the site's URL convention supports that writing system or expects transliteration. Do not publish an empty or misleading result simply because an automatic converter produced it.", "If the preferred slug already belongs to another page, compare the two search intents before adding a suffix. The pages may need to be consolidated. When they are genuinely different, add one short distinguishing term that describes the difference and remains useful over time."] }
     ],
     faq: [
       { question: "How long should a slug be?", answer: "There is no universal ideal length. Use the shortest wording that clearly distinguishes the page." },

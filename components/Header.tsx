@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { categories } from "@/lib/categories";
+import { getIndexableArticles } from "@/lib/articles";
 
 const nav = [
   { href: "/tools", label: "Tools" },
@@ -11,6 +12,8 @@ const nav = [
 ];
 
 export function Header() {
+  const articles = getIndexableArticles();
+  const activeCategories = categories.filter((category) => articles.some((article) => article.category === category.slug));
   return (
     <header className="sticky top-0 z-20 border-b border-[#dce5e0] bg-white/95 backdrop-blur">
       <div className="container flex min-h-16 items-center justify-between gap-5 py-3">
@@ -34,7 +37,7 @@ export function Header() {
           <Link href="/tools" className="whitespace-nowrap">
             Tools
           </Link>
-          {categories.map((category) => (
+          {activeCategories.map((category) => (
             <Link key={category.slug} href={`/category/${category.slug}`} className="whitespace-nowrap">
               {category.name}
             </Link>

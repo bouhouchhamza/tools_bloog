@@ -14,11 +14,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const category = getCategory(slug);
   if (!category) return {};
+  const hasArticles = getArticlesByCategory(slug).length > 0;
 
   return {
     title: category.name,
     description: category.description,
     alternates: { canonical: `/category/${category.slug}` },
+    robots: hasArticles ? undefined : { index: false, follow: true },
     openGraph: {
       title: `${category.name} | WorkflowTools.space`,
       description: category.description,

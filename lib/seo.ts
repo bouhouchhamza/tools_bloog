@@ -33,8 +33,9 @@ export function articleSchema(article: Article) {
     datePublished: article.publishedDate,
     dateModified: article.updatedDate,
     author: {
-      "@type": "Organization",
-      name: article.author
+      "@type": "Person",
+      name: article.author,
+      url: absoluteUrl("/authors/hamza-bouhouch")
     },
     publisher: {
       "@type": "Organization",

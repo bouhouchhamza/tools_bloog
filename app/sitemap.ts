@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { articles } from "@/lib/articles";
+import { getIndexableArticles } from "@/lib/articles";
 import { categories } from "@/lib/categories";
 import { getLiveTools } from "@/lib/tools";
 import { absoluteUrl } from "@/lib/utils";
@@ -9,7 +9,7 @@ function isoDate(date: string | Date) {
 }
 
 function latestArticleDateForCategory(categorySlug: string) {
-  const dates = articles
+  const dates = getIndexableArticles()
     .filter((article) => article.category === categorySlug)
     .map((article) => new Date(article.updatedDate).getTime());
 
@@ -17,6 +17,7 @@ function latestArticleDateForCategory(categorySlug: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const articles = getIndexableArticles();
   const siteLastModified = isoDate(new Date());
   const staticRoutes = [
     "",
@@ -28,7 +29,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/disclaimer",
     "/editorial-policy",
-    "/cookie-policy"
+    "/cookie-policy",
+    "/authors/hamza-bouhouch"
   ];
 
   return [
@@ -40,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: siteLastModified
     })),
-    ...categories.map((category) => ({
+    ...categories.filter((category) => getIndexableArticles().some((article) => article.category === category.slug)).map((category) => ({
       url: absoluteUrl(`/category/${category.slug}`),
       lastModified: latestArticleDateForCategory(category.slug)
     })),

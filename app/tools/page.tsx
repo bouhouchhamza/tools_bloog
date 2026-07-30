@@ -128,9 +128,9 @@ export default function ToolsPage() {
           <h2 className="mt-2 text-3xl font-black">Learn the process behind the tools</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {[
-              { href: "/blog/what-is-a-workflow", label: "Workflow basics", copy: "Understand triggers, actions, owners, and outcomes." },
-              { href: "/blog/plan-automation-workflow-before-building", label: "Plan before automating", copy: "Map the manual process before choosing tools." },
-              { href: "/blog/how-to-automate-content-planning-without-losing-quality", label: "Content planning", copy: "Use systems without losing editorial judgment." }
+              { href: "/blog/best-free-online-tools-for-small-businesses", label: "Choose a useful toolkit", copy: "Match focused tools to recurring business tasks." },
+              { href: "/blog/how-to-use-utm-links-to-track-campaigns", label: "Track campaign links", copy: "Build, test, and document consistent tagged URLs." },
+              { href: "/blog/how-to-convert-csv-to-json", label: "Convert structured data", copy: "Prepare CSV rows and validate the resulting JSON." }
             ].map((item) => (
               <Link key={item.href} href={item.href} className="rounded-lg border border-[#dce5e0] p-4 hover:border-[#16705a]">
                 <h3 className="font-bold">{item.label}</h3>

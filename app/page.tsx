@@ -4,7 +4,7 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { NewsletterBox } from "@/components/NewsletterBox";
 import { JsonLd } from "@/components/JsonLd";
 import { categories } from "@/lib/categories";
-import { articles, getFeaturedArticles } from "@/lib/articles";
+import { getFeaturedArticles, getIndexableArticles } from "@/lib/articles";
 import { getLiveTools } from "@/lib/tools";
 import { websiteSchema } from "@/lib/seo";
 
@@ -23,11 +23,13 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const featured = getFeaturedArticles();
+  const articles = getIndexableArticles();
   const liveToolCount = getLiveTools().length;
+  const activeCategories = categories.filter((category) => articles.some((article) => article.category === category.slug));
   const startHere = [
-    { href: "/blog/what-is-a-workflow", title: "Understand workflows", copy: "Learn the basic shape of triggers, actions, owners, and outcomes." },
-    { href: "/blog/how-to-build-first-simple-automation-workflow", title: "Build one simple flow", copy: "Create a small automation that is easy to test, explain, and improve." },
-    { href: "/blog/automation-mistakes-beginners-avoid", title: "Avoid early mistakes", copy: "Know the issues that make automations confusing, noisy, or hard to maintain." }
+    { href: "/blog/best-free-online-tools-for-small-businesses", title: "Choose tools by task", copy: "Build a small toolkit around work you actually repeat." },
+    { href: "/blog/how-to-use-utm-links-to-track-campaigns", title: "Create a trackable workflow", copy: "Name, build, test, and document campaign links consistently." },
+    { href: "/blog/how-to-format-and-validate-json-online", title: "Validate technical output", copy: "Format data, diagnose syntax problems, and protect sensitive inputs." }
   ];
 
   return (
@@ -74,10 +76,10 @@ export default function HomePage() {
           <div className="rounded-lg border border-[#dce5e0] bg-[#f8faf9] p-6 shadow-soft">
             <h2 className="text-xl font-bold">A practical learning path</h2>
             <ul className="mt-5 space-y-4 text-sm leading-6 text-[#40524c]">
-              <li><strong>Map:</strong> write the manual process before choosing a tool.</li>
-              <li><strong>Build:</strong> connect one trigger and one action first.</li>
-              <li><strong>Review:</strong> keep important decisions visible to a person.</li>
-              <li><strong>Improve:</strong> document what works before adding complexity.</li>
+              <li><strong>Choose:</strong> start with one specific task and the smallest suitable tool.</li>
+              <li><strong>Test:</strong> use safe sample input and check edge cases before real data.</li>
+              <li><strong>Review:</strong> verify the result against its intended use and known limitations.</li>
+              <li><strong>Document:</strong> save the final input rules and ownership beside the workflow.</li>
             </ul>
             <Link href="/category/workflow-automation" className="mt-6 inline-flex font-bold text-[#0d4f42]">
               Explore workflow automation
@@ -106,7 +108,7 @@ export default function HomePage() {
           <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#16705a]">Topic library</p>
           <h2 className="mt-2 text-3xl font-black">Explore by automation problem</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {categories.map((category) => (
+            {activeCategories.map((category) => (
               <Link key={category.slug} href={`/category/${category.slug}`} className="rounded-lg border border-[#dce5e0] p-5 hover:border-[#16705a]">
                 <h3 className="font-bold">{category.name}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5e6f68]">{category.description}</p>

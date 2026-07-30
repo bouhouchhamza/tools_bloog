@@ -26,7 +26,11 @@ export function ArticleCard({ article, priority = false }: { article: Article; p
           <p className="mt-3 text-sm leading-6 text-[#5e6f68]">{article.description}</p>
         </div>
         <div className="mt-auto flex flex-wrap items-center gap-3 text-sm text-[#5e6f68]">
+          <Link href="/authors/hamza-bouhouch" className="font-semibold text-[#0d4f42]">{article.author}</Link>
+          <span aria-hidden="true">/</span>
           <time dateTime={article.publishedDate}>{formatDate(article.publishedDate)}</time>
+          <span aria-hidden="true">/</span>
+          <span>Updated {formatDate(article.updatedDate)}</span>
           <span aria-hidden="true">/</span>
           <span>{article.readingTime}</span>
         </div>

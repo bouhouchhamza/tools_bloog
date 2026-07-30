@@ -35,6 +35,7 @@ export type Article = {
   seoTitle: string;
   metaDescription: string;
   rssDescription: string;
+  indexable?: boolean;
 };
 
 type ArticleSeed = {
@@ -48,7 +49,7 @@ type ArticleSeed = {
   internalLinks: string[];
 };
 
-const defaultAuthor = "WorkflowTools.space";
+const defaultAuthor = "Hamza Bouhouch";
 
 const seeds: ArticleSeed[] = [
   {
@@ -500,7 +501,8 @@ const generatedArticles: Article[] = seeds.map((seed, index) => {
     internalLinks: seed.internalLinks,
     seoTitle: `${seed.title} | WorkflowTools.space`,
     metaDescription: `Learn ${cleanTitle(seed.title).toLowerCase()} with clear examples, beginner-safe workflow advice, FAQs, and practical next steps.`,
-    rssDescription: rssDescriptions[seed.slug]
+    rssDescription: rssDescriptions[seed.slug],
+    indexable: false
   };
 });
 
@@ -520,7 +522,8 @@ const supportingArticles: Article[] = [
       { heading: "Step 2: write a useful prefilled message", body: ["Keep the draft short and specific. A message such as “Hello, I would like to ask about your weekday appointments” gives both sides more context than a generic greeting.", "Do not ask customers to place passwords, payment card details, health information, or other sensitive data in the draft. The customer can edit the message before sending it, so treat it as a helpful prompt rather than a fixed form."] },
       { heading: "Step 3: generate and test the link", body: ["Enter the international number and optional message in the WhatsApp Link Generator, then create the URL. Test it on both a phone and a desktop browser when those devices matter to your audience.", "Check the recipient number, punctuation, line breaks, and message wording. Testing before publication prevents a small number or encoding error from sending visitors to the wrong destination."] },
       { heading: "Practical placement examples", body: ["A service business can place the link beside a “Questions before booking?” prompt. A shop can use it for product availability questions, while a freelancer can add it to a proposal or contact page.", "Give each placement a descriptive label such as “Ask about availability on WhatsApp.” Clear labels set expectations and are more accessible than displaying a long raw URL."] },
-      { heading: "Common mistakes", body: ["Common problems include keeping the plus sign in the number, omitting the country code, publishing an untested link, and writing a prefilled message that is too long or vague.", "Another mistake is implying an immediate reply when the number is not continuously monitored. State realistic response hours and retain an alternative contact route for urgent or accessibility-related needs."] }
+      { heading: "Common mistakes", body: ["Common problems include keeping the plus sign in the number, omitting the country code, publishing an untested link, and writing a prefilled message that is too long or vague.", "Another mistake is implying an immediate reply when the number is not continuously monitored. State realistic response hours and retain an alternative contact route for urgent or accessibility-related needs."] },
+      { heading: "Troubleshooting a link that does not open correctly", body: ["If the chat does not open, compare the generated number with the account's full international number one digit at a time. Remove extensions and formatting, then test a link without a draft message to separate a number problem from a message-encoding problem.", "If mobile testing works but desktop testing does not, confirm that WhatsApp Web or the desktop application is available and signed in. Also test the published button rather than only the copied URL, because a content system can accidentally shorten, escape, or replace part of the link."] }
     ],
     faq: [{ question: "Does a WhatsApp link send a message automatically?", answer: "No. It opens a chat and may prepare a draft, but the visitor chooses whether to send it." }, { question: "Should the number include a plus sign?", answer: "Use the international country code but remove the plus sign and formatting characters in the generated link." }, { question: "Can I use the same link in several places?", answer: "Yes. Test each placement and consider different prefilled wording when the visitor's context differs." }]
   },
@@ -532,7 +535,8 @@ const supportingArticles: Article[] = [
       { heading: "Step 2: describe each line item", body: ["Use a short description that the customer will recognize, along with quantity and unit price. Separate distinct services or products rather than hiding everything inside one unexplained total.", "For project work, mention the milestone or delivery period. For hourly work, state the hours and agreed rate. Clear descriptions reduce avoidable questions and help both sides keep accurate records."] },
       { heading: "Step 3: check totals and payment terms", body: ["Confirm each quantity multiplied by its rate, then review the subtotal, discounts, taxes, and final amount. Only add tax when it is appropriate for your situation and label it clearly.", "State the due date, accepted payment method, currency, and any reference the payer should include. Payment terms should reflect the agreement already made rather than introducing a surprise after the work is complete."] },
       { heading: "Example invoice workflow", body: ["A freelance designer might list discovery, design work, and final asset preparation as separate rows. They can include the project reference, issue date, due date, and bank-transfer instructions in the notes.", "After generating the invoice, save a copy using a consistent filename, send it through the agreed channel, and record when it was issued. Follow up politely if the due date passes."] },
-      { heading: "Common invoice mistakes", body: ["Frequent errors include an incorrect customer name, ambiguous line items, mismatched currency, missing due date, and totals copied from an outdated quote.", "Do not place unnecessary sensitive information on the invoice. Review the final document before sharing it and keep corrections transparent if a sent invoice needs to be replaced."] }
+      { heading: "Common invoice mistakes", body: ["Frequent errors include an incorrect customer name, ambiguous line items, mismatched currency, missing due date, and totals copied from an outdated quote.", "Do not place unnecessary sensitive information on the invoice. Review the final document before sharing it and keep corrections transparent if a sent invoice needs to be replaced."] },
+      { heading: "Troubleshooting totals and corrected invoices", body: ["When the final amount looks wrong, recalculate one row manually: quantity multiplied by unit price. Then compare the subtotal with the sum of every row before reviewing discounts or tax. This order makes it easier to locate the first incorrect assumption.", "If an invoice has already been sent, do not silently overwrite the recipient's copy. Follow the correction method appropriate to your records and location, clearly identify the replacement, and keep both versions with a note explaining what changed."] }
     ], faq: [{ question: "Is a generated invoice automatically legally compliant?", answer: "No. Required fields and tax rules vary, so confirm the requirements that apply to your business and location." }, { question: "What should an invoice number look like?", answer: "Use a unique, consistent identifier that helps you and the customer find the invoice in your records." }, { question: "Should I include payment terms?", answer: "Yes. A clear due date, currency, and payment method help the customer understand what to do next." }]
   },
   {
@@ -543,7 +547,8 @@ const supportingArticles: Article[] = [
       { heading: "Step 2: create a naming convention", body: ["Decide how your team will spell and format repeated labels before publishing links. For example, choose either newsletter or email for the medium and use one consistently.", "Lowercase names with simple separators are easier to scan. Keep a small reference sheet containing approved sources, media, and campaign names so reports do not split one channel into several accidental variants."] },
       { heading: "Step 3: build and test the URL", body: ["Use the UTM Builder to add source, medium, campaign, and any optional values. Copy the result and open it in a private browser window to confirm the correct page loads.", "Check that the parameters remain in the address bar after redirects. Then perform a test visit and verify the visit appears as expected in your properly configured analytics system before distributing the link widely."] },
       { heading: "Campaign examples", body: ["A July customer newsletter might use source newsletter, medium email, and campaign july_customer_update. Two call-to-action buttons can use the content field to distinguish header_button from footer_button.", "A partner link could use the partner's short name as source and referral as medium. The key is not the exact vocabulary but consistent vocabulary that your reporting team understands."] },
-      { heading: "Common UTM mistakes", body: ["Avoid inconsistent capitalization, spaces that are hard to read, vague campaign names, and placing confidential customer details in parameters. Full tagged URLs can appear in browser history, analytics, and shared messages.", "Do not tag internal navigation links on your own site as campaigns; doing so can overwrite the visitor's original acquisition context. Keep a record of published links so later reports remain interpretable."] }
+      { heading: "Common UTM mistakes", body: ["Avoid inconsistent capitalization, spaces that are hard to read, vague campaign names, and placing confidential customer details in parameters. Full tagged URLs can appear in browser history, analytics, and shared messages.", "Do not tag internal navigation links on your own site as campaigns; doing so can overwrite the visitor's original acquisition context. Keep a record of published links so later reports remain interpretable."] },
+      { heading: "Troubleshooting missing or split campaign data", body: ["If visits appear under several campaign rows, compare the exact source, medium, and campaign values for capitalization, spelling, and separators. Reporting systems usually treat small text differences as different labels rather than correcting them automatically.", "If a test visit is missing, confirm that the tagged URL survives every redirect and that analytics is active on the destination. Consent choices, filters, processing delay, and cross-domain configuration can also affect the result, so a working URL alone does not prove measurement is configured correctly."] }
     ], faq: [{ question: "Do UTM parameters change the page content?", answer: "Normally they only add tracking labels to the URL, although a site could deliberately read them for customization." }, { question: "Which UTM fields are most important?", answer: "Source, medium, and campaign provide the core structure for most campaign reporting." }, { question: "Should UTM values contain private information?", answer: "No. URLs can be stored and shared, so never include personal or confidential data in tracking parameters." }]
   },
   {
@@ -554,7 +559,8 @@ const supportingArticles: Article[] = [
       { heading: "Step 2: format or validate the JSON", body: ["Paste the JSON and select Format JSON to parse it and apply readable indentation. Use Validate JSON when you only need a syntax check, or Minify JSON when a compact copy is required.", "If parsing fails, read the error and inspect the area around the reported position. Fix one syntax problem at a time, because an early missing character can create several misleading-looking problems later in the text."] },
       { heading: "A valid JSON example", body: ["A small payload might contain an object with a project string, an active Boolean, and a tags array. Property names and string values use double quotes, while true, false, and null are not quoted.", "Nested objects are valid and useful, but deep nesting becomes difficult to review. Formatting reveals the hierarchy and helps you check whether closing braces and brackets match the intended structure."] },
       { heading: "Common JSON mistakes", body: ["Typical errors include single-quoted strings, unquoted property names, trailing commas, comments, missing commas, and mismatched brackets. Those patterns may work in some programming-language objects but are not standard JSON.", "Another mistake is assuming validation proves the data is correct. Syntax validation cannot confirm that required fields exist, an email is real, or a number has the correct business meaning; those checks require a schema or application rules."] },
-      { heading: "Using the result safely", body: ["Copy formatted JSON for review and debugging, and use minified JSON only when whitespace reduction is useful. Preserve an original copy before making large manual corrections.", "When comparing two versions, a line-based diff can reveal added or removed fields after both versions have been formatted consistently. Test the final payload in a safe environment before using it in a live workflow."] }
+      { heading: "Using the result safely", body: ["Copy formatted JSON for review and debugging, and use minified JSON only when whitespace reduction is useful. Preserve an original copy before making large manual corrections.", "When comparing two versions, a line-based diff can reveal added or removed fields after both versions have been formatted consistently. Test the final payload in a safe environment before using it in a live workflow."] },
+      { heading: "Troubleshooting an error position", body: ["Parser messages often identify the character where valid parsing became impossible, not necessarily the character where the mistake began. Inspect the preceding property, comma, quote, and bracket before changing the reported position itself.", "For a large payload, temporarily reduce it to the smallest failing object or array while preserving a separate original copy. Once that fragment validates, restore surrounding sections gradually. This is safer than making several speculative edits across an unfamiliar production response."] }
     ], faq: [{ question: "Is formatted JSON always valid?", answer: "A formatter that successfully parses before formatting produces valid syntax, but it cannot confirm that the data matches an application's requirements." }, { question: "Why are single quotes rejected?", answer: "Standard JSON requires double quotes around property names and string values." }, { question: "Is it safe to paste API responses into an online tool?", answer: "Remove secrets and personal data first, and prefer tools that process input locally in your browser." }]
   },
   {
@@ -591,22 +597,26 @@ export function getArticle(slug: string) {
 }
 
 export function getArticlesByCategory(categorySlug: string) {
-  return articles.filter((article) => article.category === categorySlug);
+  return articles.filter((article) => article.indexable !== false && article.category === categorySlug);
+}
+
+export function getIndexableArticles() {
+  return articles.filter((article) => article.indexable !== false);
 }
 
 export function getFeaturedArticles() {
   const featuredSlugs = [
-    "what-is-ai-automation",
-    "how-to-build-first-simple-automation-workflow",
-    "what-is-n8n-how-does-it-work",
-    "automate-client-onboarding",
-    "choose-right-automation-tool",
-    "how-to-use-automation-without-hurting-customer-experience"
+    "how-to-create-a-whatsapp-link-for-business",
+    "how-to-use-utm-links-to-track-campaigns",
+    "how-to-format-and-validate-json-online",
+    "how-to-write-better-ai-prompts",
+    "best-free-online-tools-for-small-businesses",
+    "robots-txt-vs-sitemap-what-is-the-difference"
   ];
 
   return featuredSlugs.map(getArticle).filter((article): article is Article => Boolean(article));
 }
 
 export function getRelatedArticles(article: Article) {
-  return article.related.map(getArticle).filter((item): item is Article => Boolean(item));
+  return article.related.map(getArticle).filter((item): item is Article => Boolean(item && item.indexable !== false));
 }

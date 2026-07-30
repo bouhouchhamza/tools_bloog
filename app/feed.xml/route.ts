@@ -1,4 +1,4 @@
-import { articles } from "@/lib/articles";
+import { getIndexableArticles } from "@/lib/articles";
 import { absoluteUrl } from "@/lib/utils";
 
 export const dynamic = "force-static";
@@ -17,6 +17,7 @@ function rssDate(date: string) {
 }
 
 export function GET() {
+  const articles = getIndexableArticles();
   const items = articles
     .map((article) => {
       const articleUrl = absoluteUrl(`/blog/${article.slug}`);

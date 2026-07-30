@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/ArticleCard";
-import { articles } from "@/lib/articles";
+import { getIndexableArticles } from "@/lib/articles";
 import { categories } from "@/lib/categories";
 
 export const metadata: Metadata = {
@@ -16,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const articles = getIndexableArticles();
+  const activeCategories = categories.filter((category) => articles.some((article) => article.category === category.slug));
   return (
     <section className="container py-12">
       <div className="grid gap-8 md:grid-cols-[1fr_320px] md:items-end">
@@ -32,7 +34,7 @@ export default function BlogPage() {
         </div>
       </div>
       <div className="mt-8 flex flex-wrap gap-2">
-        {categories.map((category) => (
+        {activeCategories.map((category) => (
           <Link key={category.slug} href={`/category/${category.slug}`} className="rounded-full border border-[#dce5e0] bg-white px-3 py-2 text-sm font-bold text-[#0d4f42]">
             {category.name}
           </Link>
